@@ -57,7 +57,7 @@ echo "Number of GPUs requested/detected: $NUM_GPUS"
 
 
 # Model and Training Parameters
-CHOSEN_DATASET="CIFAR100" # Change to "CIFAR100" if desired
+CHOSEN_DATASET="/scratch/poweropt1/tej/cifar-100-python" # Change to "CIFAR100" if desired
 MODEL="resnet18"          # Good starting point for CIFAR (resnet34, resnet50 also work)
                           # VGG models or smaller custom CNNs can also be tested.
 EPOCHS=50                 # CIFAR trains faster; 50 epochs can show good convergence
