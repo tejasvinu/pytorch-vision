@@ -79,7 +79,6 @@ echo "Output directory: ${RUN_OUTPUT_DIR}"
 BASE_ARGS=" \
     ${SCRIPT_PATH} \
     --model ${MODEL} \
-    --data-path ${DATA_PATH} \
     --epochs ${EPOCHS} \
     --batch-size ${BATCH_SIZE_PER_GPU} \
     --workers $((${SLURM_CPUS_PER_TASK:-4} / ($NUM_GPUS > 0 ? $NUM_GPUS : 1) )) \
