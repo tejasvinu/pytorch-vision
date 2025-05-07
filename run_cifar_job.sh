@@ -57,19 +57,21 @@ echo "Number of GPUs requested/detected: $NUM_GPUS"
 
 
 # Model and Training Parameters
-CHOSEN_DATASET="/scratch/poweropt1/tej/cifar-100-python" # Change to "CIFAR100" if desired
+# Set the path where CIFAR10 will be downloaded or is stored
+DATA_PATH="${OUTPUT_DIR_BASE}/cifar10_data"
+mkdir -p "${DATA_PATH}"
 MODEL="resnet18"          # Good starting point for CIFAR (resnet34, resnet50 also work)
-                          # VGG models or smaller custom CNNs can also be tested.
+# VGG models or smaller custom CNNs can also be tested.
 EPOCHS=50                 # CIFAR trains faster; 50 epochs can show good convergence
 LEARNING_RATE=0.1         # Common starting LR for ResNet on CIFAR
 BATCH_SIZE_PER_GPU=256    # CIFAR images are small; can often use larger batch sizes
                           # Adjust based on GPU VRAM and model size
 
 # Output directory for this specific run
-RUN_OUTPUT_DIR="${OUTPUT_DIR_BASE}/model_output_${CHOSEN_DATASET}_${MODEL}"
+RUN_OUTPUT_DIR="${OUTPUT_DIR_BASE}/model_output_resnet18"
 mkdir -p "${RUN_OUTPUT_DIR}"
 
-echo "Starting PyTorch ${CHOSEN_DATASET} training..."
+echo "Starting PyTorch CIFAR10 training..."
 echo "Model: ${MODEL}, Epochs: ${EPOCHS}, Batch Size per GPU: ${BATCH_SIZE_PER_GPU}"
 echo "Output directory: ${RUN_OUTPUT_DIR}"
 
@@ -77,7 +79,7 @@ echo "Output directory: ${RUN_OUTPUT_DIR}"
 BASE_ARGS=" \
     ${SCRIPT_PATH} \
     --model ${MODEL} \
-    --data-path ${CHOSEN_DATASET} \
+    --data-path ${DATA_PATH} \
     --epochs ${EPOCHS} \
     --batch-size ${BATCH_SIZE_PER_GPU} \
     --workers $((${SLURM_CPUS_PER_TASK:-4} / ($NUM_GPUS > 0 ? $NUM_GPUS : 1) )) \
