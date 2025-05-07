@@ -57,7 +57,7 @@ echo "Number of GPUs requested/detected: $NUM_GPUS"
 
 
 # Model and Training Parameters
-CHOSEN_DATASET="CIFAR10" # Change to "CIFAR100" if desired
+CHOSEN_DATASET="CIFAR100" # Change to "CIFAR100" if desired
 MODEL="resnet18"          # Good starting point for CIFAR (resnet34, resnet50 also work)
                           # VGG models or smaller custom CNNs can also be tested.
 EPOCHS=50                 # CIFAR trains faster; 50 epochs can show good convergence
@@ -77,7 +77,7 @@ echo "Output directory: ${RUN_OUTPUT_DIR}"
 BASE_ARGS=" \
     ${SCRIPT_PATH} \
     --model ${MODEL} \
-    --dataset ${CHOSEN_DATASET} \
+    --data-path ${CHOSEN_DATASET} \
     --epochs ${EPOCHS} \
     --batch-size ${BATCH_SIZE_PER_GPU} \
     --workers $((${SLURM_CPUS_PER_TASK:-4} / ($NUM_GPUS > 0 ? $NUM_GPUS : 1) )) \
