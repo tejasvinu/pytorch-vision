@@ -29,7 +29,7 @@ module list
 echo "CUDA_VISIBLE_DEVICES: $CUDA_VISIBLE_DEVICES" # Should be set by Slurm if gres is used
 
 # --- Directory and Experiment Setup ---
-VISION_DIR="/path/to/your/cloned/vision" # IMPORTANT: Set this path!
+VISION_DIR="/home/poweropt1/tej/pytorch-vision" # IMPORTANT: Set this path!
 SCRIPT_PATH="${VISION_DIR}/references/classification/train.py"
 OUTPUT_DIR_BASE="./cifar_output_$(date +%Y%m%d_%H%M%S)"
 mkdir -p "${OUTPUT_DIR_BASE}"
